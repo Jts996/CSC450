@@ -3,12 +3,19 @@
 ?>
 
 </section>
-
+<p><a href="./index.php">Home></a><a href="./about.php">About Us</a>
 <article>
-    <p>
-        Here we will have information our company and/or the game itself.
-    </p>
+	<h2>
+		Welcome to DofuStats!		
+	</h2>
+
+	<p>
+		DofuStats is an open platform for Gamers and Developers alike to gain that competitive edge. With our large database, users can make informed descisions on which characters and strategies are best suited to certain situations.
+	</p>
 </article>
+
+
+
 </body>
 
 <?php

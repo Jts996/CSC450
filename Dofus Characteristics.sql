@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS resistances;
+DROP TABLE IF EXISTS damages;
+DROP TABLE IF EXISTS secondary_characteristics;
+DROP TABLE IF EXISTS primary_characteristics;
+DROP TABLE IF EXISTS characters;
+
+
 CREATE TABLE characters (name VARCHAR(20) NOT NULL,
                     server VARCHAR(20) NOT NULL,
                     class VARCHAR(20) NOT NULL,

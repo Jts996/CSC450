@@ -5,10 +5,7 @@
 </section>
 
 <article>
-    <p>
-        Forum posts will be shown here.<br>
-        Users who are logged in can read from and post to the forum.
-    </p>
+    <button type="button" ><a href="topic.php">Add new Topic</button>
 </article>
 </body>
 

@@ -28,10 +28,41 @@
         //get id of the last query
     $topic_id = $conn->lastInsertId();
 
-    //create and issue the first query
-    $add_topic = "INSERT INTO topic ('topic_id', 'title', 'user_email', 'date') VALUES ($topic_id, $title, $email, now())";
-    $conn->query($add_topic);
 
+
+    try{
+        $conn->beginTransaction();
+        //create and issue the first query
+        $add_topic = "INSERT INTO topic VALUES (:topic_id, :title, :user_email, :date)";
+        $statement = $conn->prepare($add_topic);
+
+        $statement->execute(array(
+            "topic_id" => $topic_id,
+            "title" => $title,
+            "user_email" => $email,
+            "date" => date("Y-m-d H:i:s")
+        ));
+
+        $reply_id = $conn->lastInsertId();
+
+        $add_reply = "INSERT INTO reply VALUES (:reply_id, :post_content, :user_email, :date, :topic)";
+        $statement = $conn->prepare($add_reply);
+
+        $statement->execute(array(
+            "reply_id" => $reply_id,
+            "post_content" => $content,
+            "user_email" => $email,
+            "date" => date("Y-m-d H:i:s"),
+            "topic" => $topic_id
+        ));
+
+
+
+        $conn->commit();
+    }catch(Exception $e){
+        echo "Could not post";
+        $conn->rollback();
+    }
 
 
     //create and issue the second query
@@ -40,7 +71,7 @@
     $conn->query($add_post);*/
 
     //Confirmation message
-    $msg = "<p>The <? PHP {$_POST['title']} ?> topic has been created.</p>";
+    $msg = "<p>The $title topic has been created.</p>";
 
     $conn = null;
 ?>

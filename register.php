@@ -36,18 +36,18 @@ if (isset($_POST['submit'])) {
 
     if (!$missing && !$errors) {
         try {
-            require_once('../../pdo_config.php');
-            $sql = "INSERT into users (email, firstName, lastName, phone, password) VALUES ('$email', '$firstname', '$lastname', '$phone', '$pwd')";
+            require_once('./pdo_config.php');
+            $sql = "INSERT into users (firstName, lastName, email, phone, password) VALUES ('$firstname', '$lastname', '$email', '$phone', '$pwd')";
             if($conn->query($sql))
-                echo '<h3>Thank you for registering</h3>';
+                echo '<h3>Thank you for registering!<br>You can now <a href="login.php">log in</a> using your email and password.</h3>';
             else
-                echo '<h3>We were unable to process your registration at this time</h3>';
+                echo '<h3>We were unable to process your registration at this time.</h3>';
             include 'includes/footer.php';
             exit;
         }
         catch (PDOException $e) {
             echo $e->getMessage();
-            echo '<h3>We were unable to process your registration at this time</h3>';
+            echo '<h3>We were unable to process your registration at this time.</h3>';
             include 'includes/footer.php';
             exit;
         }
